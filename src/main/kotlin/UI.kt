@@ -20,7 +20,7 @@ class UI {
         print("Enter fiction automata filename: ")
         val filename = readLine()
         check(!filename.isNullOrEmpty() && File(filename).isFile && File(filename).exists()) {
-            throw FileNotFoundException("Файл не найден")
+            throw FileNotFoundException("File not found.")
         }
 
         print("Enter string needs to be checked (write the chars of the string separated by a space): ")

@@ -1,5 +1,5 @@
-class WrongAutomataException : Exception("Неверный формат автомата")
+class WrongAutomataException : Exception("Incorrect automaton format.")
 
-class WrongStringFormat : Exception("Неверный формат строки")
+class WrongStringFormat : Exception("Incorrect string format.")
 
-class WrongStringAlphabetException : Exception("Строка использует символы не из алфавита автомата")
+class WrongStringAlphabetException : Exception("The string uses characters not from the alphabet of the automaton.")
