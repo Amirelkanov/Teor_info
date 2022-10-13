@@ -29,30 +29,34 @@ class UI {
     }
 
     fun readAutomataInput() {
-        while (true) {
-            print("Enter fiction automata filename: ")
-            val filename = readLine()
-            check(!filename.isNullOrEmpty() && File(filename).isFile && File(filename).exists()) {
-                throw FileNotFoundException("File not found.")
-            }
-            print("Do you want run string through automata or minimize it? (1 / 2): ")
-            val option = readLine()
-            check(!option.isNullOrEmpty()) { throw WrongCommandException() }
-            if (option == "2") {
-                print("Specify the path where to save the file: ")
-                val fileToSafe = readLine()
-                check(!fileToSafe.isNullOrEmpty()) { throw WrongCommandException() }
-                minimizeAutomata(filename, fileToSafe)
-                break
-            } else if (option == "1") {
-                print("Enter string needs to be checked (write the chars of the string separated by a space): ")
-                val stringToCheck =
-                    (readLine()?.split(' ')?.map { it.toInt() } ?: throw WrongStringFormat()) as MutableList<Int>
-                println("String '${stringToCheck.joinToString(" ")}' has been " +
-                        if (runStringThroughAutomata(filename, stringToCheck)) "accepted!" else "rejected.")
-                break
-            } else throw WrongCommandException()
+        try {
+            while (true) {
+                print("Enter fiction automata filename: ")
+                val filename = readLine()
+                check(!filename.isNullOrEmpty() && File(filename).isFile && File(filename).exists()) {
+                    throw FileNotFoundException("File not found.")
+                }
+                print("Do you want run string through automata or minimize it? (1 / 2): ")
+                val option = readLine()
+                check(!option.isNullOrEmpty()) { throw WrongCommandException() }
+                if (option == "2") {
+                    print("Specify the path where to save the file: ")
+                    val fileToSafe = readLine()
+                    check(!fileToSafe.isNullOrEmpty()) { throw WrongCommandException() }
+                    minimizeAutomata(filename, fileToSafe)
+                    break
+                } else if (option == "1") {
+                    print("Enter string needs to be checked (write the chars of the string separated by a space): ")
+                    val stringToCheck =
+                        (readLine()?.split(' ')?.map { it.toInt() } ?: throw WrongStringFormat()) as MutableList<Int>
+                    println("String '${stringToCheck.joinToString(" ")}' has been " +
+                            if (runStringThroughAutomata(filename, stringToCheck)) "accepted!" else "rejected.")
+                    break
+                } else throw WrongCommandException()
 
+            }
+        } catch (e: Exception) {
+            println(e.message)
         }
     }
 
